@@ -461,24 +461,40 @@
 
 
             <!-- Bloc 5 : Conduire -->
-            <div class="blocks__content conduire">
+            <div class="blocks__content conduire"
+                 data-title="Conduire"
+                 data-objectives="Planifier et piloter un projet complexe à l'aide d'outils tels que le WBS et le Gantt."
+                 data-skills="• Élaboration d'un WBS complet<br>• Réalisation d'un diagramme de Gantt<br>• Prévisions et gestion des risques<br>• Suivi de projet détaillé"
+                 data-project-title="Examen de Gestion de Projet"
+                 data-project-img="assets/img/gestion.png"
+                 data-project-desc="Dans le cadre d'un cours de Gestion de projet, j'ai réalisé un devoir complet comprenant un WBS, un Gantt, et des prévisions détaillées. Ce travail, noté 19/20, démontre une excellente maîtrise de la gestion de projet."
+                 data-download="assets/pdf/TD2_ManagementSI_RAKOTONIARY_BUT2info.pdf"
+            >
               <h3 class="blocks__title">Conduire</h3>
               <p class="blocks__description">
-                Satisfaire les besoins des utilisateurs.
+                Piloter un projet avec des outils structurés et rigoureux.
               </p>
               <p class="blocks__description">
-                Prendre en compte la sécurité et la gestion de projet.
+                Intégrer des plans détaillés pour un suivi optimal.
               </p>
             </div>
 
+
             <!-- Bloc 6 : Collaborer -->
-            <div class="blocks__content collaborer">
+            <div class="blocks__content collaborer"
+                 data-title="Collaborer : Travia - Moteur de Recherche Galactique"
+                 data-objectives="Rassembler les compétences d'une équipe de 4 pour concevoir un moteur de recherche innovant inspiré de Star Wars."
+                 data-skills="• Travail collaboratif et répartition des rôles<br>• Utilisation d'un tableau RACI pour clarifier les responsabilités<br>• Développement multi-langages (PHP, Java, C)<br>• Intégration d'une base de données MySQL pour une gestion efficace des données"
+                 data-project-title="Travia"
+                 data-project-img="assets/img/TraviaTemp.png"
+                 data-project-desc="Travia est un moteur de recherche galactique permettant à un voyageur de se déplacer entre planètes en empruntant le chemin le plus court grâce à l'algorithme A*. Réalisé en groupe de 4, ce projet a mis en lumière l'importance de la collaboration et d'une répartition claire des tâches via un tableau RACI."
+            >
               <h3 class="blocks__title">Collaborer</h3>
               <p class="blocks__description">
-                Travailler dans une équipe informatique.
+                Favoriser le travail d'équipe pour aboutir à un projet innovant.
               </p>
               <p class="blocks__description">
-                Organiser les réunions et mutualiser les ressources.
+                Intégrer efficacement les contributions de chacun.
               </p>
             </div>
           </div>
@@ -956,11 +972,12 @@
             const projectTitle = block.getAttribute("data-project-title") || "";
             const projectImg = block.getAttribute("data-project-img") || "";
             const projectDesc = block.getAttribute("data-project-desc") || "";
+            const download = block.getAttribute("data-download") || "";
 
-            // Construire le HTML interne du modal
-            const modalContent = `
+            // Construire le HTML du modal
+            let modalContent = `
           <h2>${title}</h2>
-          <h3>${level}</h3>
+          ${level ? `<h3>${level}</h3>` : ''}
           <p><strong>Objectifs :</strong> ${objectives}</p>
           <p><strong>Points clés :</strong></p>
           <p>${skills}</p>
@@ -971,20 +988,23 @@
           </div>
         `;
 
-            // Injecter dans le DOM
-            modalBody.innerHTML = modalContent;
+            // Ajouter le bouton de téléchargement si l'attribut est présent
+            if (download) {
+              modalContent += `<button class="download-btn" onclick="window.open('${download}', '_blank')">Télécharger le PDF</button>`;
+            }
 
-            // Afficher le modal
+            // Injection dans le modal et affichage
+            modalBody.innerHTML = modalContent;
             modal.style.display = "flex";
           });
         });
 
-        // Fermer le modal quand on clique sur la croix
+        // Fermer le modal en cliquant sur la croix
         modalClose.addEventListener("click", function() {
           modal.style.display = "none";
         });
 
-        // Fermer le modal en cliquant en dehors
+        // Fermer le modal en cliquant en dehors de son contenu
         window.addEventListener("click", function(e) {
           if (e.target === modal) {
             modal.style.display = "none";
