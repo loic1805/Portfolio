@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mon Portfolio</title>
+    <title>Loïc Rakotoniary</title>
     <link rel="stylesheet" href="assets/swiper-bundle.min.css" />
     <link rel="stylesheet" href="assets/newcss.css" />
     <link
@@ -964,7 +964,7 @@
         const blocks = document.querySelectorAll(".blocks__content");
         blocks.forEach(block => {
           block.addEventListener("click", function() {
-            // Récupérer les data-attributes
+
             const title = block.getAttribute("data-title") || "Titre par défaut";
             const level = block.getAttribute("data-level") || "";
             const objectives = block.getAttribute("data-objectives") || "";
@@ -974,7 +974,6 @@
             const projectDesc = block.getAttribute("data-project-desc") || "";
             const download = block.getAttribute("data-download") || "";
 
-            // Construire le HTML du modal
             let modalContent = `
           <h2>${title}</h2>
           ${level ? `<h3>${level}</h3>` : ''}
@@ -988,23 +987,18 @@
           </div>
         `;
 
-            // Ajouter le bouton de téléchargement si l'attribut est présent
             if (download) {
               modalContent += `<button class="download-btn" onclick="window.open('${download}', '_blank')">Télécharger le PDF</button>`;
             }
-
-            // Injection dans le modal et affichage
             modalBody.innerHTML = modalContent;
             modal.style.display = "flex";
           });
         });
 
-        // Fermer le modal en cliquant sur la croix
         modalClose.addEventListener("click", function() {
           modal.style.display = "none";
         });
 
-        // Fermer le modal en cliquant en dehors de son contenu
         window.addEventListener("click", function(e) {
           if (e.target === modal) {
             modal.style.display = "none";
